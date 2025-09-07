@@ -19,7 +19,7 @@ cd Chatbot/backend
 npm install
 ```
 
-2. **Create .env file:**
+2. **Create .env file in backend:**
 ```bash
 PORT=5000
 MONGO_URI=<Your MongoDB Connection String>
