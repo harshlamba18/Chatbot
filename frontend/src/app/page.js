@@ -22,7 +22,7 @@ export default function ChatPage() {
   
   useEffect(() => {
     if (token) {
-      fetch("http://localhost:5000/history", {
+      fetch("https://chatbot-nv5b.onrender.com/history", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(res => res.json())
@@ -33,7 +33,7 @@ export default function ChatPage() {
   }, [token]);
 
   const handleSignup = async () => {
-    const res = await fetch("http://localhost:5000/auth/signup", {
+    const res = await fetch("https://chatbot-nv5b.onrender.com/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -43,7 +43,7 @@ export default function ChatPage() {
   };
 
   const handleLogin = async () => {
-    const res = await fetch("http://localhost:5000/auth/login", {
+    const res = await fetch("https://chatbot-nv5b.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -64,7 +64,7 @@ export default function ChatPage() {
     setMessages([...messages, { role: "user", content: message }]);
     setMessage("");
 
-    const res = await fetch("http://localhost:5000/chat", {
+    const res = await fetch("https://chatbot-nv5b.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
