@@ -9,32 +9,14 @@ This project is intended for public institutes to help students with stress, mot
 
 
 
-## Backend Setup
-
 1. **Clone the repository:**
 
 ```bash
 git clone https://github.com/harshlamba18/Chatbot.git
-cd Chatbot/backend
-npm install
 ```
-
-2. **Create .env file in backend:**
-```bash
-PORT=5000
-MONGO_URI=<Your MongoDB Connection String>
-JWT_SECRET=<Your JWT Secret>
-OPENROUTER_API_KEY=<Your OpenRouter API Key>
-```
-3. **Run the backend Server**
-```bash
-node server.js
-```
-
 
  
-## Frontend Setup
-1. **Navigate to the frontend directory:**
+2. **Navigate to the frontend directory:**
 
 ```bash
 cd Chatbot/frontend
