@@ -15,7 +15,7 @@ This project is intended for public institutes to help students with stress, mot
 
 ```bash
 git clone https://github.com/harshlamba18/Chatbot.git
-cd backend
+cd Chatbot/backend
 npm install
 ```
 
@@ -31,12 +31,12 @@ OPENROUTER_API_KEY=<Your OpenRouter API Key>
 node server.js
 
 
-
+ 
 ## Frontend Setup
 1. **Navigate to the frontend directory:**
 
 ```bash
-cd frontend
+cd Chatbot/frontend
 npm install
 ```
 
@@ -44,4 +44,3 @@ npm install
 
 ```bash
 npm run dev
-```
