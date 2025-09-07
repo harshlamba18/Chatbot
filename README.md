@@ -20,15 +20,16 @@ npm install
 ```
 
 2. **Create .env file:**
-
+```bash
 PORT=5000
 MONGO_URI=<Your MongoDB Connection String>
 JWT_SECRET=<Your JWT Secret>
 OPENROUTER_API_KEY=<Your OpenRouter API Key>
-
+```
 3. **Run the backend Server**
-
+```bash
 node server.js
+```
 
 
  
