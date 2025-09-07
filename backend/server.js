@@ -13,7 +13,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-// -------------------- MONGOOSE SETUP --------------------
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,14 +21,14 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("✅ MongoDB Connected"))
 .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-// -------------------- SCHEMAS --------------------
+
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 });
 
 const messageSchema = new mongoose.Schema({
-  role: { type: String, enum: ["user", "assistant"], required: true }, // ✅ Fixed enum
+  role: { type: String, enum: ["user", "assistant"], required: true }, 
   content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
@@ -41,7 +41,7 @@ const chatSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 const Chat = mongoose.model("Chat", chatSchema);
 
-// -------------------- AUTH MIDDLEWARE --------------------
+
 const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ error: "Unauthorized" });
@@ -54,7 +54,7 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-// -------------------- AUTH ROUTES --------------------
+
 app.post("/auth/signup", async (req, res) => {
   const { username, password } = req.body;
   const hashed = await bcrypt.hash(password, 10);
@@ -78,7 +78,7 @@ app.post("/auth/login", async (req, res) => {
   res.json({ token });
 });
 
-// -------------------- FETCH CHAT HISTORY --------------------
+
 app.get("/history", authMiddleware, async (req, res) => {
   try {
     let chat = await Chat.findOne({ userId: req.userId });
@@ -89,20 +89,20 @@ app.get("/history", authMiddleware, async (req, res) => {
   }
 });
 
-// -------------------- CHAT ROUTE --------------------
+
 app.post("/chat", authMiddleware, async (req, res) => {
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: "Message is required" });
 
   try {
-    // 1️⃣ Store user message
+    
     let chat = await Chat.findOne({ userId: req.userId });
     if (!chat) chat = await Chat.create({ userId: req.userId, messages: [] });
 
     chat.messages.push({ role: "user", content: message });
     await chat.save();
 
-    // 2️⃣ Call LLaMA/OpenRouter API
+    
     const apiRes = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -122,7 +122,7 @@ app.post("/chat", authMiddleware, async (req, res) => {
     const data = await apiRes.json();
     const botReply = data?.choices?.[0]?.message?.content || "Sorry, I couldn't respond.";
 
-    // 3️⃣ Store assistant response
+   
     chat.messages.push({ role: "assistant", content: botReply });
     await chat.save();
 

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const chatSchema = new mongoose.Schema(
   {
-    userId: { type: String, required: true }, // ✅ must pass from frontend
+    userId: { type: String, required: true }, 
     messages: [
       {
         role: { type: String, enum: ["user", "bot"], required: true },

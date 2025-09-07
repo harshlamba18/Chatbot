@@ -14,12 +14,12 @@ export default function ChatPage() {
 
   const chatEndRef = useRef(null);
 
-  // Scroll to bottom when new messages arrive
+  
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Fetch chat history after login
+  
   useEffect(() => {
     if (token) {
       fetch("http://localhost:5000/history", {
@@ -52,7 +52,7 @@ export default function ChatPage() {
     if (data.token) {
       setToken(data.token);
       setIsLoggedIn(true);
-      // Greeting message
+      
       setMessages([{ role: "assistant", content: `Hello ${username}! How can I help you??` }]);
     } else {
       alert(data.error);
@@ -109,7 +109,7 @@ export default function ChatPage() {
     <div style={{ maxWidth: "700px", margin: "2rem auto", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
       <h2 style={{ textAlign: "center" }}>Student Counseling Chatbot</h2>
 
-      {/* Tabs */}
+     
       <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem", gap: "1rem" }}>
         <button
           style={{ padding: "0.5rem 1rem", borderRadius: "8px", backgroundColor: activeTab === "chat" ? "#007bff" : "#ccc", color: "#fff" }}
@@ -125,7 +125,7 @@ export default function ChatPage() {
         </button>
       </div>
 
-      {/* Chat Tab */}
+      
       {activeTab === "chat" && (
         <>
           <div style={{
@@ -171,7 +171,7 @@ export default function ChatPage() {
         </>
       )}
 
-      {/* History Tab */}
+      
       {activeTab === "history" && (
         <div style={{
           border: "1px solid #ddd",
